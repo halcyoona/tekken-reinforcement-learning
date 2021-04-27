@@ -39,6 +39,8 @@ class ScreenCapture:
         state = [[100,100], [60,0]]
         total_reward = 0
         done = False
+        count = 0
+        TIME = self.start_time
         # begin our loop
         while self.start_time < self.end_time:
             
@@ -51,15 +53,18 @@ class ScreenCapture:
             cv2.imwrite("./pictures/tekken-7-4k.png", img, [cv2.IMWRITE_JPEG_QUALITY, 50])
             # Display the picture
             # cv2.imshow(self.title, img)
-            values = enviromnet(state, total_reward, done)
+            values = enviromnet(state, total_reward, done, count, TIME)
             state = values[0]
             total_reward = values[1]
             done = values[2]
             
-            if self.start_time == 60:
-                state = [[100,100], [60,0]]
+            if TIME > 60:
                 total_reward = 0
                 done = False
+                self.start_time = time.time()
+                TIME = self.start_time
+                state = [[100,100], [TIME,0]]
+            count += 1
             
             # add one to fps
             self.fps+=1
