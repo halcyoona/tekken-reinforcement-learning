@@ -21,7 +21,7 @@ class pressKey():
         sleep(0.7)
 
 
-def enviromnet(state, total_reward, done):
+def enviromnet(state, total_reward, done, count, time):
     button = pressKey()
     stateInstance = States()
     #button.buttonPress("a")
@@ -68,10 +68,10 @@ def enviromnet(state, total_reward, done):
     # tf.train.list_variables('./saved_models')
 
     # for ep in range(num_episode):
-    # tf.train.list_variables('./saved_models')
+    tf.train.list_variables('./saved_models')
 
     
-    # tf.train.load_checkpoint('./saved_models')
+    tf.train.load_checkpoint('./saved_models')
 
     state = state
     total_reward  = total_reward
@@ -95,7 +95,7 @@ def enviromnet(state, total_reward, done):
 
     # state features evaluations
     health =stateInstance.stateHealthCalculate(state[0])
-    game_time = [stateInstance.stateTimeCalculate(),0]
+    game_time = [time,0]
 
     next_state = [ health, game_time] 
 
@@ -121,10 +121,11 @@ def enviromnet(state, total_reward, done):
 # if ep % 1 == 0:
     # print("Completed Training Cycle: " + str(epoch) + " out of " + str(self.num_of_epoch))
     # print("Current Loss: " + str(loss))
-
-    # saver = tf.train.Saver()
-    # saver.save(agent.sess, 'saved_models/testing')
-    # print("Model saved")
+    if count == 10:
+        saver = tf.train.Saver()
+        saver.save(agent.sess, 'saved_models/testing')
+        print("Model saved")
+        count = 0
 
     # print("Episode: {}, total_rewards: {1.2f}".format(ep, total_reward))
     # print("Episode: ", ep)
