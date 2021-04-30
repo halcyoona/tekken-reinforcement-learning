@@ -4,8 +4,9 @@ import pyautogui
 import mss
 import numpy
 from PIL import ImageGrab
-
+import keyboard
 import cv2
+import json
 
 class ScreenCapture:
     def __init__(self):
@@ -40,10 +41,13 @@ class ScreenCapture:
         total_reward = 0
         done = False
         count = 0
-        TIME = self.start_time
+        TIME = time.time() - self.start_time 
         # begin our loop
+        lst = []
+        data = {}
+        data['data'] = []
         while self.start_time < self.end_time:
-            
+            TIME =  time.time() - self.start_time
             # Get raw pixels from the screen, save it to a Numpy array
             img = numpy.asarray(ImageGrab.grab(bbox=self.mon))
             
@@ -53,18 +57,44 @@ class ScreenCapture:
             cv2.imwrite("./pictures/tekken-7-4k.png", img, [cv2.IMWRITE_JPEG_QUALITY, 50])
             # Display the picture
             # cv2.imshow(self.title, img)
-            values = enviromnet(state, total_reward, done, count, TIME)
+            values = enviromnet(state, total_reward, done, count, (60 - TIME), lst)
             state = values[0]
             total_reward = values[1]
             done = values[2]
+            lst.append(state, values[3], values[4], values[5], done)
+
+            data['data'].append({
+                'state': state,
+                'action': values[3],
+                'next_state': values[4],
+                'reward': values[5],
+                'done': done,
+                'total_reward': total_reward
+
+            })
+            if state[0][0] == 0 or state[0][1] == 0:
+                total_reward = 0
+                done = True
+                self.start_time = time.time()
+                TIME = time.time() - self.start_time  
+                state = [[100,100], [60 - TIME,0]]
             
             if TIME > 60:
                 total_reward = 0
-                done = False
+                done = True
                 self.start_time = time.time()
-                TIME = self.start_time
-                state = [[100,100], [TIME,0]]
+                TIME = time.time() - self.start_time  
+                state = [[100,100], [60 - TIME,0]]
             count += 1
+
+            if keyboard.is_pressed('p'):
+                pause= True
+                print("Pause")
+                while(pause):
+                    if keyboard.is_pressed('s'):
+                        pause = False
+                        print("Start")
+        
             
             # add one to fps
             self.fps+=1
@@ -79,6 +109,11 @@ class ScreenCapture:
                 # set start time to current time again
                 self.start_time = time.time()
 
+        with open("./data/data_01.txt", 'a') as f:
+            for i in lst:
+                f.write(i)
+        with open('./data/data_01.json', 'w') as outfile:
+            json.dump(data, outfile)
 
 if __name__ == '__main__':
 
