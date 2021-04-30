@@ -6,18 +6,6 @@ import tensorflow as tf
 import retro
 import time
 
-Air striker
-Action size: 12
-States size: 215040
-
-CartPole
-Action size: 2
-States size: 16
-
-Slimevolleygym
-Action size: 3
-States size: 12
-
 
 class QNetwork():
     
