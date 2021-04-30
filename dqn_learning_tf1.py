@@ -10,6 +10,8 @@ from gameController.keysClass import *
 from gettingHealthBar import States
 
 
+
+
 class pressKey():
     
 
@@ -21,21 +23,13 @@ class pressKey():
         sleep(0.7)
 
 
-def enviromnet(state, total_reward, done, count, time):
+def enviromnet(state, total_reward, done, count, time, traning_data):
     button = pressKey()
     stateInstance = States()
-    #button.buttonPress("a")
 
     tf.disable_v2_behavior()
-    # game_name = "Airstriker-Genesis"
-    # env = retro.make(game_name)
-    # print("Obeservation State: ", env.observation_space)
-    # for i in range(15):
-    #     print("Action space: ", env.action_space)
 
     agent = DQNAgent()
-    # state = env.reset()
-    # num_episode = 5
 
     actions = {
         "0": [1, 0, 0, 0],
@@ -65,13 +59,10 @@ def enviromnet(state, total_reward, done, count, time):
         # "10": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
         # "11": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     }
-    # tf.train.list_variables('./saved_models')
 
-    # for ep in range(num_episode):
-    tf.train.list_variables('./saved_models')
-
-    
-    tf.train.load_checkpoint('./saved_models')
+    if count == 0:
+        tf.train.list_variables('./saved_models')    
+        tf.train.load_checkpoint('./saved_models')
 
     state = state
     total_reward  = total_reward
@@ -80,10 +71,10 @@ def enviromnet(state, total_reward, done, count, time):
     actionDigit = agent.get_action(state)
     if actionDigit > 11 or actionDigit < 0:
         print("Not found")
-        actionDigit = 10 
+        actionDigit = 3
     action = actions[str(actionDigit)]
     # print("ActionDigit:", actionDigit)
-    print("Action:", action)
+    # print("Action:", action)
     # print("State:", state)
 
 ############################################################
@@ -100,19 +91,20 @@ def enviromnet(state, total_reward, done, count, time):
     next_state = [ health, game_time] 
 
     # 
-    reward = 100
+    reward = agent.get_reward(state)
     
 
 ############################################################
 
 
-
+    
     # next_state, reward, done, info = env.step(action)
-    agent.train(state, actionDigit, next_state, reward, done)
+    if done:
+        for i in traning_data:
+            agent.train(i[0], i[1], i[2], [3], i[4])
     # env.render()
     total_reward += reward
     state = next_state
-    print(state, next_state, actionDigit, reward)
     # print("next_state:", next_state)
     # print("Reward:", reward)
     # print("Done:", done)
@@ -121,7 +113,7 @@ def enviromnet(state, total_reward, done, count, time):
 # if ep % 1 == 0:
     # print("Completed Training Cycle: " + str(epoch) + " out of " + str(self.num_of_epoch))
     # print("Current Loss: " + str(loss))
-    if count == 10:
+    if done:
         saver = tf.train.Saver()
         saver.save(agent.sess, 'saved_models/testing')
         print("Model saved")
@@ -130,7 +122,7 @@ def enviromnet(state, total_reward, done, count, time):
     # print("Episode: {}, total_rewards: {1.2f}".format(ep, total_reward))
     # print("Episode: ", ep)
     # print("total_reward: ", total_reward)
-    return [state, total_reward, done]
+    return [state, total_reward, done, action, next_state, reward]
 
 if __name__ == "__main__":
     enviromnet()
