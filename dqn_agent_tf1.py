@@ -27,6 +27,15 @@ class DQNAgent(Agent):
         action = action_random if random.random() < self.eps else action_greedy
         return action
 
+    def get_reward(self, state):
+        reward = -5
+        if state[0][0] > state[0][1]:
+            (state[0][0]/ state[0][1]) * state[1][0]
+
+        if state[0][1] > state[0][0]:
+            (state[0][0] / state[0][1]) * state[1][0]
+
+        return reward
 
     def train(self, state, action, next_state, reward, done):
         q_next_state = self.q_network.get_q_state(self.sess, [next_state])
