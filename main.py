@@ -104,11 +104,11 @@ class ScreenCapture:
 
                 
                 
-                with open('./data/data_04.json', 'w') as outfile:
+                with open('./data/data_07.json', 'w') as outfile:
                     json.dump(data, outfile)
                 
                 print("Pause")
-                env.training(count)
+                # env.training(count)
                 return
                 count += 1
                 data['data'+str(count)] = []

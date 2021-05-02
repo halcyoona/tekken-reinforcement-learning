@@ -9,7 +9,7 @@ def training():
     tf.train.list_variables('./saved_models')    
     tf.train.load_checkpoint('./saved_models')
 
-    with open('./data/data_04.json', 'r') as outfile:
+    with open('./data/data_08.json', 'r') as outfile:
         obj = json.load(outfile)
 
     
@@ -21,6 +21,6 @@ def training():
     
     saver = tf.train.Saver()
     saver.save(agent.sess, 'saved_models/testing')
-    # print(i)
+    print('hhh')
 
 training()

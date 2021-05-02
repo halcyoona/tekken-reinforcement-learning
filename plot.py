@@ -4,29 +4,99 @@ import numpy as np
 
 import json
 
-def read_jason():
-    with open('./data/data_04.json', 'r') as outfile:
-        obj = json.load(outfile)
+import numpy as np
+class Plot:
+    def __init__(self):
+
+        self.reward = np.array([])
+        self.actions = np.array([])
+
+    def read_jason(self):
 
 
-    data = obj["data1"]
-    print(data)
+        # with open('./data/data_01.json', 'r') as outfile:
+        #     obj = json.load(outfile)
 
-    for i in data:      
-        print(i["action"], i["total_reward"])
-# Data for plotting
-def plot():
-    t = np.arange(0.0, 2.0, 0.01)
-    s = 1 + np.sin(2 * np.pi * t)
 
-    fig, ax = plt.subplots()
-    ax.plot(t, s)
+        # data = obj["data"]
 
-    ax.set(xlabel='time (s)', ylabel='voltage (mV)',
-        title='About as simple as it gets, folks')
-    ax.grid()
+        # # print(data)
+        count = 0
+        # for i in data:  
+        #     print(i["action"])
+        #     self.reward = np.append(self.reward, [i["total_reward"]])    
+        #     self.actions = np.append(self.actions, [count])
+        #     count+=1    
+        #     # print(i["action"], i["total_reward"])
 
-    fig.savefig("test.png")
-    plt.show()
+        with open('./data/data_02.json', 'r') as outfile:
+            obj = json.load(outfile)
 
-read_jason()
+
+        data = obj["data"]
+
+        # print(data)
+       
+        for i in data:  
+            print(i["action"])
+            self.reward = np.append(self.reward, [i["total_reward"]])    
+            self.actions = np.append(self.actions, [count])
+            count+=1    
+            # print(i["action"], i["total_reward"])
+        print(self.reward)
+
+
+        
+        with open('./data/data_04.json', 'r') as outfile:
+            obj = json.load(outfile)
+
+
+        data = obj["data1"]
+
+        # print(data)
+       
+        for i in data:  
+            print(i["action"])
+            self.reward = np.append(self.reward, [i["total_reward"]])    
+            self.actions = np.append(self.actions, [count]) 
+            count+=1    
+            # print(i["action"], i["total_reward"])
+        print(self.reward)
+
+        
+        with open('./data/data_07.json', 'r') as outfile:
+            obj = json.load(outfile)
+
+
+        data = obj["data1"]
+
+        # print(data)
+       
+        for i in data:  
+            print(i["action"])
+            self.reward = np.append(self.reward, [i["total_reward"]])    
+            self.actions = np.append(self.actions, [count])
+            count+=1    
+            # print(i["action"], i["total_reward"])
+        print(self.reward)
+
+    # Data for plotting
+    def plot(self):
+
+        import matplotlib
+        import matplotlib.pyplot as plt
+
+        fig, ax = plt.subplots()
+        ax.plot(self.actions, self.reward)
+
+        ax.set(xlabel='No of : actions', ylabel='Rewards ',
+            title='Reward on actions (after next round reward will start from zero )')
+        ax.grid()
+
+        fig.savefig("test.png")
+        plt.show()
+
+plt = Plot()
+plt.read_jason()
+
+plt.plot()

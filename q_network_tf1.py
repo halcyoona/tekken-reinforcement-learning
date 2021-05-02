@@ -14,7 +14,13 @@ class QNetwork():
         self.q_state_action = tf.reduce_sum(tf.multiply(self.q_state, action_one_hot), axis=1)          
         self.loss = tf.reduce_mean(tf.square(self.q_state_action- self.q_target_in)) 
         self.optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(self.loss)
-        
+        # print(self.state_in.shape)
+        # print(self.action_in.shape)
+        # print(self.q_target_in.shape)
+        # print(action_one_hot.shape)
+        # print(self.hidden1.shape)
+        # print(self.q_state.shape)
+        # print(self.q_state_action.shape)
          
     def update_model(self, session, state, action, q_target):
         feed = {self.state_in:state, self.action_in:action, self.q_target_in:q_target}

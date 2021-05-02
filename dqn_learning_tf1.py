@@ -71,7 +71,7 @@ class Enviroment:
     def training(self, count):
               
         
-        with open('./data/data_04.json', 'r') as outfile:
+        with open('./data/data_07.json', 'r') as outfile:
             obj = json.load(outfile)
 
         
@@ -88,7 +88,7 @@ class Enviroment:
 
     def enviromnet(self,state,done, time):
         
-        actionDigit = self.agent.get_action(state)
+        actionDigit = int(self.agent.get_action(state))
         if actionDigit > 8 or actionDigit < 0:
             print("Not found")
             actionDigit = 0
@@ -116,6 +116,8 @@ class Enviroment:
 
         state = next_state
 
+        saver = tf.train.Saver()
+        saver.save(self.agent.sess, 'saved_models/testing')
         if done:
             done= False
         

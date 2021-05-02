@@ -33,7 +33,7 @@ class DQNAgent(Agent):
             reward = (state[0][0]/ state[0][1]) * state[1][0]
 
         if state[0][1] > state[0][0]:
-            reward = (state[0][0] / state[0][1]) * state[1][0]
+            reward = -((state[0][0] / state[0][1]) * state[1][0])
 
         return reward
 
