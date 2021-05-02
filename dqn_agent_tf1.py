@@ -9,7 +9,7 @@ from q_network_tf1 import QNetwork
 class DQNAgent(Agent):
     def __init__(self, env=0, discount_rate=0.97, learning_rate=0.01, epsilon=1.0):
         self.state_dim = (2,2)
-        self.action_size = (1,4)
+        self.action_size = 4
         self.q_network = QNetwork(self.state_dim, self.action_size, learning_rate)
 
         self.gamma = discount_rate

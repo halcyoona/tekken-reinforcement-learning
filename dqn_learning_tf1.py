@@ -89,9 +89,9 @@ class Enviroment:
     def enviromnet(self,state,done, time):
         
         actionDigit = self.agent.get_action(state)
-        if actionDigit > 11 or actionDigit < 0:
+        if actionDigit > 8 or actionDigit < 0:
             print("Not found")
-            actionDigit = 3
+            actionDigit = 0
         action = self.actions[str(actionDigit)]
         
 
@@ -125,7 +125,7 @@ class Enviroment:
         print("action: ", action)
         print("next_state: ", next_state)
         print("reward: ", reward)
-        return [state, action, next_state, reward, done]
+        return [state, actionDigit, next_state, reward, done]
 
 if __name__ == "__main__":
     enviromnet()
