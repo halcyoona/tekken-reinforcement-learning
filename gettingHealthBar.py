@@ -6,10 +6,15 @@ class GetHealth:
         self.image_path = image_path
         self.saved_location_player_one = saved_location_player_one
         self.saved_location_player_two = saved_location_player_two
+        # Mehmood laptop
         # self.coordinates_player_two = (1700, 80, 2800,150 )
         # self.coordinates_player_one = (250, 80,1350,150 )
-        self.coordinates_player_two = (1070, 90, 1670,130 )
-        self.coordinates_player_one = (250, 90,850,130 )    
+        # Gap PC 
+        # self.coordinates_player_two = (1070, 90, 1670,130 )
+        # self.coordinates_player_one = (250, 90,850,130 )
+        self.coordinates_player_one = (170, 60, 570, 90 )
+        self.coordinates_player_two = (710, 60, 1110, 90 )
+            
 
     def capturePlayerOneHealthBar(self):
         image_obj = Image.open(self.image_path)
@@ -44,10 +49,15 @@ class States():
         count1 = instance.capturePlayerOneHealthBar()
         count2 = instance.capturePlayerTwoHealthBar()
         # if i == 0:
-        max1 = 10000
-        max2 = 10000
-        # print(count1)
-        # print(count2)
+        max1 = 3000
+        max2 = 3000
+        print(count1)
+        print(count2)
+        
+        if count1 > max1:
+            max1 = max2 = count1
+        if count2 > max2:
+            max1 = max2 = count2
 
         health_player_one = round((count1 / max1 ) * 100)
         health_player_two = round((count2 / max2) * 100)
@@ -70,9 +80,6 @@ if __name__ == '__main__':
     state = States()
     state.stateHealthCalculate()
     state.stateTimeCalculate()
-
-
-
 
 
 

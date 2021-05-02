@@ -13,7 +13,7 @@ class QNetwork():
         self.state_in = tf.keras.Input(shape=(state_dim), dtype=tf.dtypes.float32)
         self.action_in = tf.keras.Input(shape=(), dtype=tf.dtypes.int32)
         self.q_target_in = tf.keras.Input(shape=(), dtype=tf.dtypes.float32)
-        self.action_one_hot = tf.one_hot(self.action_in, depth=action_size)
+        self.action_one_hot = tf.(self.action_in, depth=action_size)
         
         # model = tf.keras.models.Sequential([
         #     tf.keras.layers.Conv2D(200, (3,3), activation='relu', input_shape=(self.state_in,))(self.state_in)
