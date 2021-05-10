@@ -6,7 +6,6 @@ class GetHealth:
         self.image_path = image_path
         self.saved_location_player_one = saved_location_player_one
         self.saved_location_player_two = saved_location_player_two
-        # Mehmood laptop
         # self.coordinates_player_two = (1700, 80, 2800,150 )
         # self.coordinates_player_one = (250, 80,1350,150 )
         # Gap PC 

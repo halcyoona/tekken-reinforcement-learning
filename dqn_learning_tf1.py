@@ -68,10 +68,10 @@ class Enviroment:
         }
 
 
-    def training(self, count):
+    def training(self, file ,count):
               
         
-        with open('./data/data_07.json', 'r') as outfile:
+        with open(file, 'r') as outfile:
             obj = json.load(outfile)
 
         
