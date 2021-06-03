@@ -24,8 +24,8 @@ class DQNAgent(Agent):
         q_state = self.q_network.get_q_state(self.sess, [state])
         action_greedy = np.argmax(q_state)
         action_random = np.random.randint(self.action_size)
-        action = action_random if random.random() < self.eps else action_greedy
-        return action
+        # action = action_random if random.random() < self.eps else action_greedy
+        return action_random
 
     def get_reward(self, state):
         reward = -5

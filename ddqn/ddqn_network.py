@@ -14,7 +14,7 @@ class DDQNetwork():
         self.network.add(layers.Flatten())
         self.network.add(layers.Dense(64, activation='relu'))
         self.network.add(layers.Dense(action_size, activation="linear"))
-        self.optimizer = self.network.optimizers.RMSprop(lr=learning_rate, rho=discount_rate, epsilon=epsilon)
+        self.optimizer = self.network.optimizer.RMSprop(name='RMSprop',lr=learning_rate, rho=discount_rate, epsilon=epsilon)
         self.network.compile(self.optimizer, loss='mse')
 
 
@@ -37,6 +37,6 @@ class DDQNetwork():
 
 
 
-# if __name__ == '__main__':
-#     ins = DDQNetwork((1280, 720, 3), 8, learning_rate=0.01, discount_rate=0.97,  epsilon=1.0)
-#     ins.model_summary()
+if __name__ == '__main__':
+    ins = DDQNetwork((1280, 720, 3), 8, learning_rate=0.01, discount_rate=0.97,  epsilon=1.0)
+    ins.model_summary()

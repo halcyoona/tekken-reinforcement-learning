@@ -17,7 +17,7 @@ class ScreenCapture:
         self.start_time = time.time()
         
         #set end time accordingly
-        self.end_time = self.start_time + 300
+        self.end_time = self.start_time + 10
         
         # displays the frame rate every 2 second
         self.display_time = 2
@@ -103,7 +103,7 @@ class ScreenCapture:
                 pause= True
 
                 flag = 1
-                # file = './data/data_08.json'
+                # file = './random-data/data_01.json'
                 # with open(file , 'w') as outfile:
                 #     json.dump(data, outfile)
                 
@@ -131,12 +131,12 @@ class ScreenCapture:
                 self.fps = 0
                 # set start time to current time again
                 
-        file = './data/data_10.json'
+        file = './random-data/data_01.json'
         with open(file , 'w') as outfile:
             json.dump(data, outfile)
         
         
-        env.training(file, count)
+        # env.training(file, count)
 
         # with open("./data/data_01.txt", 'a') as f:
         #     for i in lst:

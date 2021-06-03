@@ -78,11 +78,11 @@ class Enviroment:
 
         data = obj["data"+str(count)]
 
-        for i in data:      
-            self.agent.train(i["state"], i["action"], i["next_state"], i["reward"], i["done"])
+        # for i in data:      
+        #     self.agent.train(i["state"], i["action"], i["next_state"], i["reward"], i["done"])
         
-        saver = tf.train.Saver()
-        saver.save(self.agent.sess, 'saved_models/testing')
+        # saver = tf.train.Saver()
+        # saver.save(self.agent.sess, 'saved_models/testing')
 
     ############################################################
 
