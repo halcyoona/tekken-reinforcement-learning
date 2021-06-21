@@ -17,7 +17,7 @@ class ScreenCapture:
         self.start_time = time.time()
         
         #set end time accordingly
-        self.end_time = self.start_time + 10
+        self.end_time = self.start_time + 180
         
         # displays the frame rate every 2 second
         self.display_time = 2

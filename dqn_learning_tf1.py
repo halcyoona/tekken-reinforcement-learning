@@ -39,10 +39,14 @@ class Enviroment:
 
 
         self.actions = {
-            "0": [1, 0, 0, 0],
-            "1": [0, 1, 0, 0],
-            "2": [0, 0, 1, 0],
-            "3": [0, 0, 0, 1]
+            "0":  [1, 0, 0, 0, 0, 0, 0, 0],
+            "1":  [0, 1, 0, 0, 0, 0, 0, 0],
+            "2":  [0, 0, 1, 0, 0, 0, 0, 0],
+            "3":  [0, 0, 0, 1, 0, 0, 0, 0],
+            "4":  [0, 0, 0, 0, 1, 0, 0, 0],
+            "5":  [0, 0, 0, 0, 0, 1, 0, 0],
+            "6":  [0, 0, 0, 0, 0, 0, 1, 0],
+            "7":  [0, 0, 0, 0, 0, 0, 0, 1]
             # "4": [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
             # "5": [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
             # "6": [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
@@ -57,10 +61,14 @@ class Enviroment:
             "1": "s",
             "2": "x",
             "3": "z",
+            "4": "i",
+            "5": "j",
+            "6": "k",
+            "7": "l"
             # "4": [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
             # "5": [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
             # "6": [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-            # "7": [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],aaz
+            # "7": [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
             # "8": [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
             # "9": [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
             # "10": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
@@ -78,17 +86,12 @@ class Enviroment:
 
         data = obj["data"+str(count)]
 
-        # for i in data:      
-        #     self.agent.train(i["state"], i["action"], i["next_state"], i["reward"], i["done"])
-        
-        # saver = tf.train.Saver()
-        # saver.save(self.agent.sess, 'saved_models/testing')
 
     ############################################################
 
     def enviromnet(self,state,done, time):
         
-        actionDigit = int(self.agent.get_action(state))
+        actionDigit = int(self.agent.getAction(state))
         if actionDigit > 8 or actionDigit < 0:
             print("Not found")
             actionDigit = 0
@@ -109,7 +112,7 @@ class Enviroment:
         next_state = [ health, game_time] 
 
         # 
-        reward = self.agent.get_reward(state)
+        reward = self.agent.getReward(state)
         
 
     ############################################################

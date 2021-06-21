@@ -22,10 +22,10 @@ class QNetwork():
         # print(self.q_state.shape)
         # print(self.q_state_action.shape)
          
-    def update_model(self, session, state, action, q_target):
+    def updateModel(self, session, state, action, q_target):
         feed = {self.state_in:state, self.action_in:action, self.q_target_in:q_target}
         session.run(self.optimizer, feed_dict=feed)
 
-    def get_q_state(self, session, state):
+    def getQState(self, session, state):
         q_state = session.run(self.q_state, feed_dict={self.state_in:state})
         return q_state
