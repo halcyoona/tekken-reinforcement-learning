@@ -79,7 +79,7 @@ class Enviroment:
 
     def enviromnet(self,state, done, time, state_img):
         
-        actionDigit = int(self.agent.get_action(state_img))
+        actionDigit = int(self.agent.getAction(state_img))
         if actionDigit > 8 or actionDigit < 0:
             print("Not found")
             actionDigit = 0
@@ -100,7 +100,7 @@ class Enviroment:
         next_state = [ health, game_time] 
 
         # 
-        reward = self.agent.get_reward(state)
+        reward = self.agent.getReward(state)
         
 
     ############################################################
