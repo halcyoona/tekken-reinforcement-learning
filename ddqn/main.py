@@ -71,9 +71,7 @@ class TekkenAutomate :
             
 class ScreenCapture:
     def __init__(self):
-
-        #button object
-        butten = pressKey()
+        
 
         ######################################automation code
         #tekken automate flag 
