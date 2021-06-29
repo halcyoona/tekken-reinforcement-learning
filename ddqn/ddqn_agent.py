@@ -6,11 +6,14 @@ from agent import Agent
 
 from ddqn_network import DDQNetwork
 
+from reward_network import CNN
+
 class DDQNAgent(Agent):
     def __init__(self, learning_rate=0.01, discount_rate=0.97, epsilon=1.0):
         self.state_dim = (1280, 720, 3)
         self.action_size = 8
         self.network = DDQNetwork(self.state_dim, self.action_size, learning_rate, discount_rate, epsilon)
+        self.reward_cnn = CNN(self.state_dim, self.action_size, learning_rate, discount_rate, epsilon)
 
         self.gamma = discount_rate
         self.eps = epsilon
@@ -35,6 +38,9 @@ class DDQNAgent(Agent):
 
         return reward
 
+    def getAutomatedReward(self, state):
+        return self.reward_cnn.getReward(state)
+
     def train(self, state, action, next_state, reward, done):
         q_next_values = self.network.getQState(next_state)
         q_values = self.network.getQState(state)
@@ -42,6 +48,7 @@ class DDQNAgent(Agent):
         q_updated_value = reward + (self.gamma * np.amax(q_next_values))
         q_values[0][action] = q_updated_value
         self.network.updateModel(state, q_values)
+        self.reward_cnn.updateModel(state, reward)
         if done: self.eps = max(0.1, 0.99 * self.eps)
 
     
