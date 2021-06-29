@@ -18,21 +18,21 @@ class DDQNetwork():
         self.network.compile(self.optimizer, loss='mse')
 
 
-    def update_model(self, state, q_values):
+    def updateModel(self, state, q_values):
         self.network.fit(state, q_values)
     
 
-    def get_q_state(self, state):
+    def getQState(self, state):
         return self.network.predict(state)
 
     
-    def save_model(self):
+    def saveModel(self):
         self.network.save_weights("./save_models/weights.h5")
 
-    def load_model(self):
+    def loadModel(self):
         self.network.load_weights("./save_models/weights.h5")
 
-    def model_summary(self):
+    def modelSummary(self):
         self.network.summary()
 
 
