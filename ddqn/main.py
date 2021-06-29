@@ -81,7 +81,7 @@ class ScreenCapture:
         #tekken automate flag 
         self.game_flage = True
 
-        self.
+        self.tekkenAutomate = TekkenAutomate()        
         ###################################################
         # title of our window
         self.title = "FPS benchmark"
@@ -132,7 +132,8 @@ class ScreenCapture:
             
             if self.game_flage == True: # its means you are not in game
 
-            
+                tekken = TekkenAutomate()
+                self.tekkenAutomate.checkMainManue(r"menue-image.jpg")
 
 
             TIME =  time.time() - self.start_time
