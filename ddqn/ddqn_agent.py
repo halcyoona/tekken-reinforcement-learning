@@ -18,14 +18,14 @@ class DDQNAgent(Agent):
 
 
     
-    def get_action(self, state):
-        q_values = self.network.get_q_state(state)
+    def getAction(self, state):
+        q_values = self.network.getQState(state)
         action_greedy = np.amax(q_values[0])
         action_random = np.random.randint(self.action_size)
         action = action_random if random.random() <= self.eps else action_greedy
         return action
 
-    def get_reward(self, state):
+    def getReward(self, state):
         reward = -5
         if state[0][0] > state[0][1]:
             reward = (state[0][0]/ state[0][1]) * state[1][0]
@@ -36,17 +36,17 @@ class DDQNAgent(Agent):
         return reward
 
     def train(self, state, action, next_state, reward, done):
-        q_next_values = self.network.get_q_state(next_state)
-        q_values = self.network.get_q_state(state)
+        q_next_values = self.network.getQState(next_state)
+        q_values = self.network.getQState(state)
         q_next_values = (1-done) * np.amax(q_next_values[0])
         q_updated_value = reward + (self.gamma * np.amax(q_next_values))
         q_values[0][action] = q_updated_value
-        self.network.update_model(state, q_values)
+        self.network.updateModel(state, q_values)
         if done: self.eps = max(0.1, 0.99 * self.eps)
 
     
     def load(self):
-        self.network.load_model()
+        self.network.loadModel()
     
     def save(self):
-        self.network.save_model()
+        self.network.saveModel()
