@@ -16,7 +16,7 @@ class Agent():
             self.action_shape = env.action_space.shape
             print("Action range:", self.action_low, self.action_high)
         
-    def get_action(self, state):
+    def getAction(self, state):
         # returning random action
         if self.is_discrete_action or self.is_multibinary_action:
             action = random.choice(range(self.action_size))
