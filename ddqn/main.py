@@ -69,8 +69,6 @@ class TekkenAutomate :
             time.sleep(0.5)
             self.button.buttonPress('z')
             
-tekken = TekkenAutomate()
-tekken.checkMainManue(r"menue-image.jpg") 
 class ScreenCapture:
     def __init__(self):
 
