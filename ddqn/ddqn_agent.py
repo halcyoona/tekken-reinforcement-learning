@@ -10,7 +10,7 @@ from reward_network import CNN
 
 class DDQNAgent(Agent):
     def __init__(self, learning_rate=0.01, discount_rate=0.97, epsilon=1.0):
-        self.state_dim = (1280, 720, 3)
+        self.state_dim = ( 720, 1280, 3)
         self.action_size = 8
         self.network = DDQNetwork(self.state_dim, self.action_size, learning_rate, discount_rate, epsilon)
         self.reward_cnn = CNN(self.state_dim, self.action_size, learning_rate, discount_rate, epsilon)
