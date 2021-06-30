@@ -38,5 +38,5 @@ class DDQNetwork():
 
 
 if __name__ == '__main__':
-    ins = DDQNetwork((1280, 720, 3), 8, learning_rate=0.01, discount_rate=0.97,  epsilon=1.0)
+    ins = DDQNetwork(( 720, 1280, 3), 8, learning_rate=0.01, discount_rate=0.97,  epsilon=1.0)
     ins.model_summary()
