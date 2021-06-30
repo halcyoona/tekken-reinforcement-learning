@@ -105,7 +105,7 @@ class Enviroment:
 
     ############################################################
 
-        state = next_state
+        
 
         if done:
             done=False
